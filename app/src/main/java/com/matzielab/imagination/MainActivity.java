@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         float Z = event.values[2];
 
         String XYZ = "X: "+X+"\nY: "+Y+"\nZ: "+Z;
-        setTextOutput(XYZ);
 
         HashMap<String, Float> RGB = imagination.rgbFromAccelerometer(X, Y, Z);
 
@@ -57,6 +56,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         int G = Math.round(RGB.get("G"));
         int B = Math.round(RGB.get("B"));
 
+        String RGBString = "R: "+R+"\nG: "+G+"\nB: "+B;
+
+        setTextOutput(XYZ+"\n\n"+RGBString);
         setLayoutBG(R, G, B);
     }
 

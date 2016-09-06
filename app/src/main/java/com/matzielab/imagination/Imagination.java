@@ -26,9 +26,9 @@ public class Imagination {
 
         HashMap<String, Float> RGB = new HashMap<>();
 
-        float scaledX = Math.round(X)+(0-(ACCELEROMETER_MIN));
-        float scaledY = Math.round(Y)+(0-(ACCELEROMETER_MIN));
-        float scaledZ = Math.round(Z)+(0-(ACCELEROMETER_MIN));
+        float scaledX = X+(0-(ACCELEROMETER_MIN));
+        float scaledY = Y+(0-(ACCELEROMETER_MIN));
+        float scaledZ = Z+(0-(ACCELEROMETER_MIN));
 
         float Xpercentage = makeBetween1And0(scaledX/(ACCELEROMETER_MAX*2));
         float Ypercentage = makeBetween1And0(scaledY/(ACCELEROMETER_MAX*2));
