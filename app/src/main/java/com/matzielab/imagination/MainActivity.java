@@ -1,98 +1,83 @@
 package com.matzielab.imagination;
 
-import android.graphics.Color;
+import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity implements SensorEventListener{
+public class MainActivity extends AppCompatActivity {
 
-    RelativeLayout layout;
-    TextView textOutput;
+    RelativeLayout accelerometerLayout;
+    TextView accelerometerTitle;
+    SensorEventListener sensorListener;
 
-    Sensor accelerometer;
-    SensorManager sensorManager;
+    ImaginationAccelerometer imagination;
 
-    Imagination imagination;
+    public void startAccelerometerActivity(View view) {
+        Intent intent = new Intent(this, AccelerometerActivity.class);
 
-    private void initSensor() {
-        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        sensorManager.registerListener(this, accelerometer, sensorManager.SENSOR_DELAY_NORMAL);
+        Pair<View, String> layoutPair = Pair.create((View) accelerometerLayout, accelerometerLayout.getTransitionName());
+        Pair<View, String> titlePair = Pair.create((View) accelerometerTitle, accelerometerTitle.getTransitionName());
+
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, layoutPair, titlePair);
+        startActivity(intent, options.toBundle());
     }
 
-    private void killSensor() {
-        sensorManager.unregisterListener(this);
-        sensorManager = null;
-        accelerometer = null;
+    private void changeAccelerometerBackground(SensorEvent event) {
+        float X = event.values[0], Y = event.values[1], Z = event.values[2];
+        int color = imagination.rgbFromAccelerometer(X, Y, Z);
+        accelerometerLayout.setBackgroundColor(color);
     }
 
-    private void setTextOutput(String output) {
-        textOutput.setText(output);
+    private void initSensorListener() {
+        sensorListener = new SensorEventListener() {
+            @Override
+            public void onSensorChanged(SensorEvent event) {
+                Sensor sensor = event.sensor;
+                if (sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+                    changeAccelerometerBackground(event);
+                }
+            }
+
+            @Override
+            public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+            }
+        };
     }
-
-    private void setLayoutBG(int R, int G, int B) {
-        int BGColor = Color.rgb(R,G,B);
-        layout.setBackgroundColor(BGColor);
-    }
-
-    private void sensorChange(SensorEvent event) {
-        float X = event.values[0];
-        float Y = event.values[1];
-        float Z = event.values[2];
-
-        String XYZ = "X: "+X+"\nY: "+Y+"\nZ: "+Z;
-
-        HashMap<String, Float> RGB = imagination.rgbFromAccelerometer(X, Y, Z);
-
-        int R = Math.round(RGB.get("R"));
-        int G = Math.round(RGB.get("G"));
-        int B = Math.round(RGB.get("B"));
-
-        String RGBString = "R: "+R+"\nG: "+G+"\nB: "+B;
-
-        setTextOutput(XYZ+"\n\n"+RGBString);
-        setLayoutBG(R, G, B);
-    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        accelerometerLayout = (RelativeLayout) findViewById(R.id.accelerometer_item);
+        accelerometerTitle = (TextView) findViewById(R.id.accelerometer_title);
+        initSensorListener();
 
-        layout = (RelativeLayout) findViewById(R.id.mainLayout);
-        textOutput = (TextView) findViewById(R.id.mainTextView);
-        imagination = new Imagination();
-        initSensor();
+        imagination = new ImaginationAccelerometer(this)
+                .setListener(sensorListener)
+                .init();
     }
 
     @Override
     protected void onPostResume() {
         super.onPostResume();
-        initSensor();
+        initSensorListener();
+        imagination.setListener(sensorListener).init();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        killSensor();
-    }
-
-    @Override
-    public void onSensorChanged(SensorEvent event) {
-        sensorChange(event);
-    }
-
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-        // Not implemented because this shizzle is not needed in our bizzle
+        imagination.kill();
     }
 }
