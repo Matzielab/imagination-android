@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import java.util.HashMap;
 
 /**
  * Created by Matzie on 16-09-07.

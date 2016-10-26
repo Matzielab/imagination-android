@@ -1,31 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.matzielab.imagination.MainActivity"
-    android:background="@color/colorPrimary">
+    android:id="@+id/imagination_background">
 
-    <RelativeLayout
-        android:id="@+id/accelerometer_item"
-        android:transitionName="@string/transitionNameAccelerometerContainer"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/main_viewpager"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_margin="10dp"
-        android:onClick="startAccelerometerActivity">
-
-        <TextView
-            android:id="@+id/accelerometer_title"
-            android:transitionName="@string/transitionNameAccelerometerTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/AccelerometerTitle"
-            android:textSize="40sp"
-            android:textColor="@color/colorAccent"/>
-
-    </RelativeLayout>
+        android:layout_height="match_parent" />
 
 
-</LinearLayout>
+</RelativeLayout>

@@ -1,9 +1,6 @@
 <resources>
     <string name="app_name">Imagination</string>
 
-    // Accelerometer
-    <string name="transitionNameAccelerometerContainer">accelerometerContainer</string>
-    <string name="transitionNameAccelerometerTitle">accelerometerTitle</string>
-    <string name="AccelerometerTitle">Accelerometer</string>
-    <string name="AccelerometerDescription">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fringilla ut mi vitae ultrices. Nulla porttitor egestas turpis et porttitor. Ut ligula nulla, rutrum at scelerisque id, malesuada sed enim. Duis ex turpis, viverra ornare sapien sit amet, suscipit pharetra lectus. Ut tristique luctus erat a tristique. Aliquam erat volutpat.</string>
+    <string name="credits">by Matzielab</string>
+
 </resources>
