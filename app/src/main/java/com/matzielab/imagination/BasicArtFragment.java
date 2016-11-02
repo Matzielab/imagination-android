@@ -19,9 +19,9 @@ public class BasicArtFragment extends Fragment{
     private ViewGroup viewGroupContainer;
 
     public int layout = R.layout.basic_art;
-    public int image = R.drawable.squiggles;
-    public String title = "title";
-    public String description = "description";
+    public int image = R.drawable.peace_circut;
+    public String title = "Title";
+    public String description = "Description";
 
     private void setLayoutInflater(LayoutInflater layoutInflater) {
         this.layoutInflater = layoutInflater;

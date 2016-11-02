@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">Imagination</string>
 
+    <string name="startpage_instructions">Swipe left to discover</string>
     <string name="credits">by Matzielab</string>
 
+    <string name="how_title">How does this work?</string>
+    <string name="how_text">Turn your phone around to change the color.\n\nImagination uses your accelerometer to create a color, by holding your phone in different ways it\'ll change color. Shaking also works.\n\nCan you make it red?</string>
+
+    <string name="why_title">What is this good for?</string>
+    <string name="why_text">Nothing. And anything!\n\nThis can be used in any way imaginable. Here it\'s used in visual art but future plans for this includes games and other apps.</string>
 </resources>

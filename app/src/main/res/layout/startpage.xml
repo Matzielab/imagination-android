@@ -5,11 +5,23 @@
     android:layout_height="match_parent">
 
     <ImageView
+        android:id="@+id/startpage_logo"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="20dp"
+        android:src="@drawable/imagination_logo"/>
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_margin="30dp"
-        android:src="@drawable/imagination_logo"/>
+        android:gravity="center"
+        android:padding="4dp"
+        android:text="@string/startpage_instructions"
+        android:textSize="15sp"
+        android:textColor="@color/colorAccent"
+        android:background="#26000000"/>
+
 
     <LinearLayout
         android:layout_width="wrap_content"

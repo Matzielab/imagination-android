@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initPager() {
-        PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager());
+        PagerAdapter adapter = new PagerAdapter(this, getSupportFragmentManager());
         pager.setAdapter(adapter);
     }
 

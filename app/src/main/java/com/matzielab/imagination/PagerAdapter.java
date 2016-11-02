@@ -1,5 +1,6 @@
 package com.matzielab.imagination;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -13,19 +14,37 @@ import java.util.ArrayList;
 public class PagerAdapter extends FragmentPagerAdapter {
 
     private ArrayList<Fragment> slides = new ArrayList<>();
+    private Context context;
 
-    public PagerAdapter(FragmentManager fragmentManager) {
+    public PagerAdapter(Context context, FragmentManager fragmentManager) {
         super(fragmentManager);
+        this.context = context;
         this.prepareSlides();
+    }
+
+    private Fragment firstSlide()
+    {
+        BasicArtFragment slide = new BasicArtFragment();
+        slide.title = StringHelper.getString(context, R.string.how_title);
+        slide.description = StringHelper.getString(context, R.string.how_text);
+
+        return slide;
+    }
+
+    private Fragment secondSlide()
+    {
+        BasicArtFragment slide = new BasicArtFragment();
+        slide.image = R.drawable.abbey_road;
+        slide.title = StringHelper.getString(context, R.string.why_title);
+        slide.description = StringHelper.getString(context, R.string.why_text);
+
+        return slide;
     }
 
     private void prepareSlides() {
         slides.add(new StartpageFragment());
-
-        for (int i=0; i<3; i++) {
-            Fragment slide = new BasicArtFragment();
-            slides.add(slide);
-        }
+        slides.add(this.firstSlide());
+        slides.add(this.secondSlide());
     }
 
     @Override
